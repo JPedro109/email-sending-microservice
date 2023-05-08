@@ -1,0 +1,9 @@
+{
+  "name": "email-sending-microservice",
+  "version": "1.0.0",
+  "description": "Microsserviço de envio de email",
+  "main": "dist/server.js",
+  "repository": "https://github.com/JPedro109/email-sending-microservice.git",
+  "author": "João Pedro <joaopedromoraesnsilva@gmail.com>",
+  "license": "MIT"
+}
