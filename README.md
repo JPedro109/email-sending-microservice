@@ -15,7 +15,6 @@
 - Jest
 
 # Padrões Utilizados
-- Clean Architecture
+- Conceitos de Clean Architecture
 - SOLID
 - Adapter
-- Decorator
