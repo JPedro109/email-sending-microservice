@@ -1,4 +1,4 @@
-import { QueueServiceAdapter, QueueHelper } from "@/layers/external";
+import { QueueServiceAdapter, QueueHelper } from "@/infra";
 
 describe("External - QueueServiceAdapter", () => {
     

@@ -1,5 +1,4 @@
-import { MailServiceAdapter } from "@/layers/external/mail";
-import { QueueServiceAdapter } from "@/layers/external/queue";
+import { QueueServiceAdapter, MailServiceAdapter } from "@/infra";
 import { SendEmailUseCase } from "@/layers/send-email-use-case";
 
 export const mailServiceAdapter = new MailServiceAdapter();

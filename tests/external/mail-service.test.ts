@@ -1,4 +1,4 @@
-import { MailServiceAdapter } from "@/layers/external";
+import { MailServiceAdapter } from "@/infra";
 
 describe("External - MailServiceAdapter", () => {
     

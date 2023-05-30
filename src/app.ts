@@ -1,6 +1,6 @@
 import { QUEUE_NAME } from "@/shared";
 import { sendEmailUseCase, queueServiceAdapter } from "@/factories";
-import { QueueHelper } from "@/layers/external";
+import { QueueHelper } from "@/infra";
 import { MailDTO } from "@/layers/send-email-use-case";
 
 const bootstrap = async () => {

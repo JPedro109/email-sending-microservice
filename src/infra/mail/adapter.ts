@@ -19,7 +19,7 @@ export class MailServiceAdapter implements MailServiceProtocol {
     private readonly host: string = HOST_PROVIDER_EMAIL;
     private readonly port: number = PORT_PROVIDER_EMAIL;
     private readonly ssl = false;
-    private readonly emailBodiesPath = "./src/layers/external/mail/bodies";
+    private readonly emailBodiesPath = "./src/infra/mail/bodies";
 
     constructor() {
 

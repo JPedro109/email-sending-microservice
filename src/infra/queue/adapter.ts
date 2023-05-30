@@ -1,6 +1,6 @@
 import { Message } from "amqplib";
 import { QueueServiceProtocol } from "@/layers/send-email-use-case";
-import { QueueHelper } from "../helper";
+import { QueueHelper } from "./helper";
 
 export class QueueServiceAdapter implements QueueServiceProtocol {
 
