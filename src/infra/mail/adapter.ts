@@ -4,7 +4,7 @@ import {
     PASSWORD_PROVIDER_EMAIL, 
     PORT_PROVIDER_EMAIL
 } from "@/shared";
-import { MailServiceProtocol } from "@/layers/send-email-use-case";
+import { MailServiceProtocol } from "@/infra";
 
 import path from "path";
 
