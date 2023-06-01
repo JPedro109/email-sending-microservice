@@ -1,9 +1,9 @@
-import { SendEmailUseCase } from "@/layers/send-email-use-case";
+import { SendEmailService } from "@/services";
 import { MailServiceStub } from "./__mocks__";
 
 const makeSut = () => {
     const mailStub = new MailServiceStub();
-    const sut = new SendEmailUseCase(mailStub);
+    const sut = new SendEmailService(mailStub);
 
     return {
         sut

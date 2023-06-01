@@ -4,7 +4,7 @@
 import {
     MailServiceProtocol,
     QueueServiceProtocol 
-} from "@/layers/send-email-use-case";
+} from "@/infra";
 
 export class MailServiceStub implements MailServiceProtocol {
     async sendMail(to: string, subject: string, html: string, context?: object): Promise<void> { 

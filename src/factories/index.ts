@@ -1,6 +1,6 @@
 import { QueueServiceAdapter, MailServiceAdapter } from "@/infra";
-import { SendEmailUseCase } from "@/layers/send-email-use-case";
+import { SendEmailService } from "@/services";
 
 export const mailServiceAdapter = new MailServiceAdapter();
 export const queueServiceAdapter = new QueueServiceAdapter();
-export const sendEmailUseCase = new SendEmailUseCase(mailServiceAdapter);
+export const sendEmailUseCase = new SendEmailService(mailServiceAdapter);

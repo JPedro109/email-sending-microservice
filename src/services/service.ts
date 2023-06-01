@@ -1,7 +1,7 @@
-import { MailServiceProtocol } from "@/layers/send-email-use-case/ports";
+import { MailServiceProtocol } from "@/infra";
 import { MailDTO } from "./dto";
 
-export class SendEmailUseCase {
+export class SendEmailService {
 
     constructor(
         private readonly mailService: MailServiceProtocol, 
