@@ -1,2 +1,2 @@
-export * from "./service";
-export * from "./dto";
+export * from "./send-email-service";
+export * from "./send-email-service-dto";

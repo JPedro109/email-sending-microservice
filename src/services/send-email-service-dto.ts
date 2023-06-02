@@ -1,4 +1,4 @@
-export type MailDTO = {
+export type SendEmailServiceDTO = {
     to: string;
     subject: string;
     template: string;
