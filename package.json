@@ -8,7 +8,10 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "husky install",
+    "build": "rimraf dist && tsc -p tsconfig-build.json && tsc-alias -p tsconfig-build.json",
+    "dev": "ts-node-dev -r tsconfig-paths/register --files src/app.ts",
     "test": "jest --passWithNoTests --detectOpenHandles --silent",
+    "start": "yarn build && node dist/app.js",
     "test:coverage": "yarn test --coverage",
     "test:staged": "yarn test --findRelatedTests",
     "test:watch": "yarn test --watchAll",
