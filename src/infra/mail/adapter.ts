@@ -40,14 +40,18 @@ export class MailServiceAdapter implements MailServiceProtocol {
     }
 
     async sendMail(to: string, subject: string, html: string, context?: object): Promise<void> {
-        const email = {
-            from: this.email,
-            to,
-            subject,
-            template: html,
-            context
-        };
-
-        await this.mail.sendMail(email);
+        try {
+            const email = {
+                from: this.email,
+                to,
+                subject,
+                template: html,
+                context
+            };
+    
+            await this.mail.sendMail(email);
+        } catch(e) {
+            console.log(e);
+        }
     }
 }
