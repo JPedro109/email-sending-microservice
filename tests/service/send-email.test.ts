@@ -10,7 +10,7 @@ const makeSut = () => {
     };
 };
 
-describe("Use case - SendEmail", () => {
+describe("Service - SendEmail", () => {
 
     test("Shoud send email", async () => {
         const to = "email@test.com";
