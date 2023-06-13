@@ -1,6 +1,6 @@
 import { MailServiceAdapter } from "@/infra";
 
-describe("External - MailServiceAdapter", () => {
+describe("Infra - MailServiceAdapter", () => {
     
     test("Should send email | sendEmail", async () => {
         const email = "email@test.com";

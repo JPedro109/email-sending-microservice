@@ -1,6 +1,6 @@
 import { QueueServiceAdapter, QueueHelper } from "@/infra";
 
-describe("External - QueueServiceAdapter", () => {
+describe("Infra - QueueServiceAdapter", () => {
     
     const queue = "queue";
 
