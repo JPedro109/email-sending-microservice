@@ -1,4 +1,4 @@
-import { SendEmailService } from "@/services";
+import { SendEmailService } from "@/service";
 import { MailServiceStub } from "./__mocks__";
 
 const makeSut = () => {
