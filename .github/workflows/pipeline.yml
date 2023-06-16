@@ -1,0 +1,49 @@
+name: Node.js CI 
+
+on:
+  push:
+    branches: [ "staging" ]
+  pull_request:
+    branches: [ "staging" ]
+
+env:
+  HOST_PROVIDER_EMAIL: "sandbox.smtp.mailtrap.io"
+  PORT_PROVIDER_EMAIL: 2525
+  EMAIL_PROVIDER_EMAIL: ${{ secrets.EMAIL_PROVIDER_EMAIL }}
+  PASSWORD_PROVIDER_EMAIL: ${{ secrets.PASSWORD_PROVIDER_EMAIL }}
+  QUEUE_HOST: "amqp://admin:admin@localhost:5672"
+  QUEUE_NAME: "queue"
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use RabbitMQ 3.8
+      uses: getong/rabbitmq-action@v1.2
+      with:
+        rabbitmq version: 3.8
+        rabbitmq user: admin
+        rabbitmq password: admin 
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+    
+    - name: "Install yarn package"
+      run: npm i -g yarn
+
+    - name: "Install dependencies"
+      run: yarn
+
+    - name: "Run tests"
+      run: yarn test:coverage
+    
+    - name: Send coverage result to Coveralls
+      uses: coverallsapp/github-action@v1
