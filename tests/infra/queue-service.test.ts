@@ -4,7 +4,10 @@ describe("Infra - QueueServiceAdapter", () => {
     
     const queue = "queue";
 
-    beforeAll(async () => await QueueHelper.connect());
+    beforeAll(async () => {
+        await QueueHelper.connect();
+        await QueueHelper.channel.assertQueue(queue);
+    });
     afterAll(async () => {
         await QueueHelper.cancel(queue);
         await QueueHelper.disconnect();
