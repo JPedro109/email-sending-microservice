@@ -18,7 +18,10 @@ describe("Service - SendEmail", () => {
         const template = "create-body";
         const { sut } = makeSut();
 
-        const result = await sut.execute({ to, subject, template });
+        const result = await sut.execute({
+            pattern: "send_email",
+            data: { to, subject, template }
+        });
 
         expect(result).toBe(true);
     });

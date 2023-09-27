@@ -7,7 +7,9 @@ export class SendEmailService {
         private readonly mailService: MailServiceProtocol, 
     ) { }
 
-    async execute({ to, subject, template, context }: SendEmailServiceDTO): Promise<boolean> {
+    async execute(dto: SendEmailServiceDTO): Promise<boolean> {
+        const { data } = dto;
+        const { to, subject, template, context } = data;
         await this.mailService.sendMail(to, subject, template, context);
         return true;
     }
