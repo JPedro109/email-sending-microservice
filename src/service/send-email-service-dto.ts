@@ -5,6 +5,6 @@ export type SendEmailServiceDTO = {
         subject: string;
         template: string;
         context?: object;
-        service?: object
+        service?: string
     }
 }
