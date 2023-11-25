@@ -12,7 +12,7 @@ const makeSut = () => {
 
 describe("Service - SendEmailService", () => {
 
-    test("Shoud send email", async () => {
+    test("Should send email", async () => {
         const to = "email@test.com";
         const subject = "Test";
         const template = "create-body";
