@@ -1,14 +1,9 @@
 import { QueueHelper } from "@/infra";
-import { mailServiceListener } from "@/presentation";
+import { sendEmailServiceListener } from "@/factories";
 
-const bootstrap = async () => {
-    await QueueHelper
-        .connect()
-        .then(() => {
-            mailServiceListener();
-            console.log("Serviço de envio de email iniciado");
-        })
-        .catch(e => console.log(e));
-};
-
-bootstrap();
+QueueHelper
+    .connect()
+    .then(async () => {
+        sendEmailServiceListener.execute();
+    })
+    .catch(console.error);

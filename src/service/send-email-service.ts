@@ -1,7 +1,7 @@
 import { MailServiceProtocol } from "@/infra";
-import { SendEmailServiceDTO } from "./send-email-service-dto";
+import { SendEmailServiceDTO, SendEmailServiceProtocol } from "@/service";
 
-export class SendEmailService {
+export class SendEmailService implements SendEmailServiceProtocol {
 
     constructor(
         private readonly mailService: MailServiceProtocol, 
