@@ -3,21 +3,21 @@ import { Channel, Connection, connect } from "amqplib";
 
 export class QueueHelper {
 
-    private static connection: Connection | null = null;
-    static channel: Channel;
+    private connection: Connection | null = null;
+    channel: Channel;
 
-    static async connect(): Promise<void> {
-        if(!QueueHelper.connection) {
-            QueueHelper.connection = await connect(QUEUE_HOST);
-            QueueHelper.channel = await QueueHelper.connection.createChannel();
+    async connect(): Promise<void> {
+        if(!this.connection) {
+            this.connection = await connect(QUEUE_HOST);
+            this.channel = await this.connection.createChannel();
         }
     }
 
-    static async disconnect(): Promise<void> {
-        await QueueHelper.connection.close();
+    async disconnect(): Promise<void> {
+        await this.connection.close();
     }
 
-    static async cancel(queue: string): Promise<void> {
-        await QueueHelper.channel.cancel(queue);
+    async cancel(queue: string): Promise<void> {
+        await this.channel.cancel(queue);
     }
 }

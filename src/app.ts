@@ -1,7 +1,6 @@
-import { QueueHelper } from "@/infra";
-import { sendEmailServiceListener } from "@/factories";
+import { queueHelper, sendEmailServiceListener } from "@/factories";
 
-QueueHelper
+queueHelper
     .connect()
     .then(async () => {
         sendEmailServiceListener.execute();

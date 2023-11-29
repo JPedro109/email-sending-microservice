@@ -3,18 +3,19 @@ import { QueueServiceAdapter, QueueHelper } from "@/infra";
 describe("Infra - QueueServiceAdapter", () => {
     
     const queue = "queue";
+    const queueHelper = new QueueHelper();
 
     beforeAll(async () => {
-        await QueueHelper.connect();
-        await QueueHelper.channel.assertQueue(queue);
+        await queueHelper.connect();
+        await queueHelper.channel.assertQueue(queue);
     });
     afterAll(async () => {
-        await QueueHelper.cancel(queue);
-        await QueueHelper.disconnect();
+        await queueHelper.cancel(queue);
+        await queueHelper.disconnect();
     });
 
     test("Should send message | sendMessage", async () => {
-        const sut = new QueueServiceAdapter();
+        const sut = new QueueServiceAdapter(queueHelper);
         jest.spyOn(sut, "sendMessage");
         
         await sut.sendMessage("queue", { name: "João" });
@@ -24,7 +25,7 @@ describe("Infra - QueueServiceAdapter", () => {
     });
 
     test("Should receive message | sendMessage", async () => {
-        const sut = new QueueServiceAdapter();
+        const sut = new QueueServiceAdapter(queueHelper);
         jest.spyOn(sut, "sendMessage");
         await sut.sendMessage(queue, { name: "João" });
 		
