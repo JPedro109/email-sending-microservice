@@ -1,10 +1,11 @@
 import { SendEmailServiceListener } from "@/presentation";
-import { QueueServiceStub, SendEmailServiceStub } from "./__mocks__";
+import { QueueServiceStub, SecretsServiceStub, SendEmailServiceStub } from "./__mocks__";
 
 const makeSut = () => {
     const sendEmailServiceStub = new SendEmailServiceStub();
     const queueServiceStub = new QueueServiceStub();
-    const sut = new SendEmailServiceListener(sendEmailServiceStub, queueServiceStub);
+    const secretsServiceStub = new SecretsServiceStub();
+    const sut = new SendEmailServiceListener(sendEmailServiceStub, queueServiceStub, secretsServiceStub);
 
     return {
         sut

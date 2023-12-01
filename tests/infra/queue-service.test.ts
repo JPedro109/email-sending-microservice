@@ -1,9 +1,10 @@
-import { QueueServiceAdapter, QueueHelper } from "@/infra";
+import { QueueServiceAdapter, QueueHelper, SecretsServiceAdapter } from "@/infra";
 
 describe("Infra - QueueServiceAdapter", () => {
     
     const queue = "queue";
-    const queueHelper = new QueueHelper();
+    const secretsServiceAdapter = new SecretsServiceAdapter();
+    const queueHelper = new QueueHelper(secretsServiceAdapter);
 
     beforeAll(async () => {
         await queueHelper.connect();

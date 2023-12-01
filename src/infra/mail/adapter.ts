@@ -1,10 +1,4 @@
-import { 
-    EMAIL_PROVIDER_EMAIL, 
-    HOST_PROVIDER_EMAIL, 
-    PASSWORD_PROVIDER_EMAIL, 
-    PORT_PROVIDER_EMAIL
-} from "@/shared";
-import { MailServiceProtocol } from "@/infra";
+import { MailServiceProtocol, SecretsEnum, SecretsServiceProtocol } from "@/infra";
 
 import path from "path";
 
@@ -14,20 +8,19 @@ import hbs from "nodemailer-express-handlebars";
 export class MailServiceAdapter implements MailServiceProtocol {
 
     private readonly mail: Transporter<SentMessageInfo>;
-    private readonly email: string = EMAIL_PROVIDER_EMAIL;
-    private readonly password: string = PASSWORD_PROVIDER_EMAIL;
-    private readonly host: string = HOST_PROVIDER_EMAIL;
-    private readonly port: number = PORT_PROVIDER_EMAIL;
     private readonly ssl = false;
     private readonly emailBodiesPath = "./src/infra/mail/bodies";
 
-    constructor() {
+    constructor(private readonly secretsService: SecretsServiceProtocol) {
 
         this.mail = nodemailer.createTransport({
-            host: this.host,
-            port: this.port,
+            host: this.secretsService.getRequiredSecret(SecretsEnum.HostProviderEmail),
+            port: parseInt(this.secretsService.getRequiredSecret(SecretsEnum.PortProviderEmail)),
             secure: this.ssl,
-            auth: { user: this.email, pass: this.password }
+            auth: { 
+                user: this.secretsService.getRequiredSecret(SecretsEnum.EmailProviderEmail), 
+                pass: this.secretsService.getRequiredSecret(SecretsEnum.PasswordProviderEmail)
+            }
         }).use("compile", hbs({
             viewEngine: {
                 defaultLayout: null,
@@ -41,7 +34,7 @@ export class MailServiceAdapter implements MailServiceProtocol {
 
     async sendMail(to: string, subject: string, html: string, context?: object): Promise<void> {
         const email = {
-            from: this.email,
+            from: this.secretsService.getRequiredSecret(SecretsEnum.EmailProviderEmail),
             to,
             subject,
             template: html,
