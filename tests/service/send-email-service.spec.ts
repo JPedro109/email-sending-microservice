@@ -1,9 +1,10 @@
 import { SendEmailService } from "@/service";
-import { MailServiceStub } from "./__mocks__";
+import { EmailSentRepositoryStub, MailServiceStub } from "./__mocks__";
 
 const makeSut = () => {
     const mailStub = new MailServiceStub();
-    const sut = new SendEmailService(mailStub);
+    const emailSentRepositoryStub = new EmailSentRepositoryStub();
+    const sut = new SendEmailService(mailStub, emailSentRepositoryStub);
 
     return {
         sut
