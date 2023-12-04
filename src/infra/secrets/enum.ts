@@ -5,5 +5,6 @@ export enum SecretsEnum {
     PortProviderEmail = "PORT_PROVIDER_EMAIL",
     QueueHost = "QUEUE_HOST",
     QueueName = "QUEUE_NAME",
+    DatabaseNoSQLUrl= "DATABASE_NOSQL_URL",
     Secret = "SECRET"
 }
