@@ -8,3 +8,5 @@ export * from "./queue/helper";
 export * from "./secrets/adapter";
 export * from "./secrets/protocol";
 export * from "./secrets/enum";
+
+export * from "./database";
