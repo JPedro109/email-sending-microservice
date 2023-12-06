@@ -1,5 +1,4 @@
-import { EmailSentRepositoryProtocol, EmailSentModel } from "@/infra";
-import { DatabaseNoSQLHelper } from "../helpers";
+import { EmailSentRepositoryProtocol, EmailSentModel, DatabaseNoSQLHelper } from "@/infra";
 
 import { WithId, Document } from "mongodb";
 
