@@ -10,3 +10,5 @@ export * from "./secrets/protocol";
 export * from "./secrets/enum";
 
 export * from "./database";
+
+export * from "./log";
