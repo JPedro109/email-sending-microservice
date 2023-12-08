@@ -16,13 +16,9 @@ export class QueueServiceAdapter implements QueueServiceProtocol {
 	
     async consumeMessage<Type>(queue: string, callback: (message: Type) => Promise<void>): Promise<void> {
         this.queueHelper.channel.consume(queue, async (message) => {
-            try {
-                const deserializedMessage = this.deserializeMessage<Type>(message);
-                await callback(deserializedMessage);
-                this.queueHelper.channel.ack(message);
-            } catch(e) {
-                console.log(e);
-            }
+            const deserializedMessage = this.deserializeMessage<Type>(message);
+            await callback(deserializedMessage);
+            this.queueHelper.channel.ack(message);
         });
     }
 }
