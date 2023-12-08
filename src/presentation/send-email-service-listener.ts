@@ -12,7 +12,11 @@ export class SendEmailServiceListener {
     execute(): boolean {
         this.queueService.consumeMessage<SendEmailServiceDTO>(
             this.secretsService.getRequiredSecret(SecretsEnum.QueueName), async (message: SendEmailServiceDTO) => {
-                await this.sendEmailService.execute(message);
+                try {
+                    await this.sendEmailService.execute(message);
+                } catch(e) {
+                    console.error(e);
+                }
             }
         );
 
