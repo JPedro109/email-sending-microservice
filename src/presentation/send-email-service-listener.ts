@@ -1,4 +1,4 @@
-import { QueueServiceProtocol, SecretsEnum, SecretsServiceProtocol } from "@/infra";
+import { LogServiceProtocol, QueueServiceProtocol, SecretsEnum, SecretsServiceProtocol } from "@/infra";
 import { SendEmailServiceProtocol, SendEmailServiceDTO } from "@/service";
 
 export class SendEmailServiceListener {
@@ -6,7 +6,8 @@ export class SendEmailServiceListener {
     constructor(
         private readonly sendEmailService: SendEmailServiceProtocol,  
         private readonly queueService: QueueServiceProtocol,
-        private readonly secretsService: SecretsServiceProtocol
+        private readonly secretsService: SecretsServiceProtocol,
+        private readonly logService: LogServiceProtocol
     ) { }
 
     execute(): boolean {
@@ -15,10 +16,13 @@ export class SendEmailServiceListener {
                 try {
                     await this.sendEmailService.execute(message);
                 } catch(e) {
-                    console.error(e);
+                    const log = { message: JSON.stringify(message), error: JSON.stringify(e) };
+                    this.logService.error("Erro no Envio de Email", JSON.stringify(log));
                 }
             }
         );
+
+        this.logService.info("Serviço Iniciado", "Serviço de envio de email iniciado");
 
         return true;
     }
