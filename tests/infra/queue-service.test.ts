@@ -1,9 +1,23 @@
-import { QueueServiceAdapter, QueueHelper, SecretsServiceAdapter } from "@/infra";
+import { 
+    QueueServiceAdapter,
+    QueueHelper,
+    SecretsServiceAdapter,
+    LogBashAdapter,
+    LogRepositoryAdapter,
+    LogNoSQLAdapter,
+    LogServiceFacade,
+    DatabaseNoSQLHelper 
+} from "@/infra";
 
 describe("Infra - QueueServiceAdapter", () => {
     
     const queue = "queue";
     const secretsServiceAdapter = new SecretsServiceAdapter();
+    const databaseNoSQLHelper = new DatabaseNoSQLHelper(secretsServiceAdapter);
+    const logBashAdapter = new LogBashAdapter();
+    const logRepository = new LogRepositoryAdapter(databaseNoSQLHelper);
+    const logNoSQLAdapter = new LogNoSQLAdapter(logRepository, logBashAdapter);
+    const logServiceFacade = new LogServiceFacade(logBashAdapter, logNoSQLAdapter);
     const queueHelper = new QueueHelper(secretsServiceAdapter);
 
     beforeAll(async () => {
@@ -16,7 +30,7 @@ describe("Infra - QueueServiceAdapter", () => {
     });
 
     test("Should send message | sendMessage", async () => {
-        const sut = new QueueServiceAdapter(queueHelper);
+        const sut = new QueueServiceAdapter(queueHelper, logServiceFacade);
         jest.spyOn(sut, "sendMessage");
         
         await sut.sendMessage("queue", { name: "João" });
@@ -26,7 +40,7 @@ describe("Infra - QueueServiceAdapter", () => {
     });
 
     test("Should receive message | sendMessage", async () => {
-        const sut = new QueueServiceAdapter(queueHelper);
+        const sut = new QueueServiceAdapter(queueHelper, logServiceFacade);
         jest.spyOn(sut, "sendMessage");
         await sut.sendMessage(queue, { name: "João" });
 		
