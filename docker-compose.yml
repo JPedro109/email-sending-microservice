@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+
+  email-sending-microservice:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: email-sending-microservice
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+     - database-nosql
+     - queue
+    volumes:
+      - ./:/email-sending-microservice
+
+  database-nosql:
+    image: mongo:4.4.6
+    container_name: mongo-db-email-sending-microservice
+    restart: always
+    ports:
+      - 27017:27017
+
+  queue:
+    image: "rabbitmq:3.8-management-alpine"
+    container_name: queue-email-sending-microservice
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
