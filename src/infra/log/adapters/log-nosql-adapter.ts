@@ -1,5 +1,4 @@
-import { LogServiceProtocol, LogRepositoryProtocol } from "@/infra";
-import { LogBashAdapter } from "./log-bash-adapter";
+import { LogServiceProtocol, LogRepositoryProtocol, LogBashAdapter } from "@/infra";
 
 export class LogNoSQLAdapter implements LogServiceProtocol {
 

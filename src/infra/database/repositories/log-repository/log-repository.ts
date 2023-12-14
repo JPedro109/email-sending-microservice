@@ -1,4 +1,5 @@
 import { LogRepositoryProtocol, LogModel, DatabaseNoSQLHelper } from "@/infra";
+
 import { WithId, Document } from "mongodb";
 
 export class LogRepositoryAdapter implements LogRepositoryProtocol {

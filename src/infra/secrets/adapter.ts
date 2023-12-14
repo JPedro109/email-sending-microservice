@@ -1,5 +1,4 @@
-import { SecretsEnum } from "./enum";
-import { SecretsServiceProtocol } from "./protocol";
+import { SecretsEnum, SecretsServiceProtocol } from "@/infra";
 
 import "dotenv/config";
 

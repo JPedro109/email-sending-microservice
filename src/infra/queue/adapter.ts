@@ -1,6 +1,5 @@
 import { Message } from "amqplib";
-import { LogServiceProtocol, QueueServiceProtocol } from "@/infra";
-import { QueueHelper } from "./helper";
+import { LogServiceProtocol, QueueServiceProtocol, QueueHelper } from "@/infra";
 
 export class QueueServiceAdapter implements QueueServiceProtocol {
 

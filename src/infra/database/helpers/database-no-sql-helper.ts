@@ -1,4 +1,5 @@
 import { SecretsEnum, SecretsServiceAdapter } from "@/infra";
+
 import { MongoClient, Collection } from "mongodb";
 
 export class DatabaseNoSQLHelper {
