@@ -1,8 +1,8 @@
-import { SecretsEnum, SecretsServiceProtocol } from "@/infra";
+import { SecretsEnum, SecretsProtocol } from "@/infra";
 
 import "dotenv/config";
 
-export class SecretsServiceAdapter implements SecretsServiceProtocol {
+export class SecretsAdapter implements SecretsProtocol {
     
     getSecret(name: SecretsEnum): string | null {
         const value = process.env[name];

@@ -1,6 +1,6 @@
-import { LogServiceProtocol } from "@/infra";
+import { LogProtocol } from "@/infra";
 
-export class LogBashAdapter implements LogServiceProtocol {
+export class LogBashAdapter implements LogProtocol {
 
     trace(title: string, message: string, trace: string): boolean {
         console.log();

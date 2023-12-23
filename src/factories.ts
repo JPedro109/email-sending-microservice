@@ -1,33 +1,33 @@
 import { 
-    QueueServiceAdapter, 
-    MailServiceAdapter, 
-    SecretsServiceAdapter, 
+    QueueAdapter, 
+    MailAdapter, 
+    SecretsAdapter, 
     QueueHelper, 
     DatabaseNoSQLHelper, 
     EmailSentRepositoryAdapter, 
     LogRepositoryAdapter, 
     LogNoSQLAdapter, 
     LogBashAdapter, 
-    LogServiceFacade 
+    LogFacade 
 } from "@/infra";
 import { SendEmailService } from "@/service";
 import { SendEmailServiceListener } from "@/presentation";
 
 // Infra
-export const secretsServiceAdapter = new SecretsServiceAdapter();
-export const mailServiceAdapter = new MailServiceAdapter(secretsServiceAdapter);
-export const queueHelper = new QueueHelper(secretsServiceAdapter);
-export const databaseNoSQLHelper = new DatabaseNoSQLHelper(secretsServiceAdapter);
+export const secretsAdapter = new SecretsAdapter();
+export const mailAdapter = new MailAdapter(secretsAdapter);
+export const queueHelper = new QueueHelper(secretsAdapter);
+export const databaseNoSQLHelper = new DatabaseNoSQLHelper(secretsAdapter);
 export const emailSentRepository = new EmailSentRepositoryAdapter(databaseNoSQLHelper);
 export const logBashAdapter = new LogBashAdapter();
 export const logRepository = new LogRepositoryAdapter(databaseNoSQLHelper);
 export const logNoSQLAdapter = new LogNoSQLAdapter(logRepository, logBashAdapter);
-export const logServiceFacade = new LogServiceFacade(logBashAdapter, logNoSQLAdapter);
-export const queueServiceAdapter = new QueueServiceAdapter(queueHelper, logServiceFacade);
+export const logFacade = new LogFacade(logBashAdapter, logNoSQLAdapter);
+export const queueAdapter = new QueueAdapter(queueHelper, logFacade);
 
-// Service
-export const sendEmailService = new SendEmailService(mailServiceAdapter, emailSentRepository, logServiceFacade);
+// 
+export const sendEmail = new SendEmailService(mailAdapter, emailSentRepository, logFacade);
 
 // Presentation
-export const sendEmailServiceListener 
-    = new SendEmailServiceListener(sendEmailService, queueServiceAdapter, secretsServiceAdapter, logServiceFacade);
+export const sendEmailListener 
+    = new SendEmailServiceListener(sendEmail, queueAdapter, secretsAdapter, logFacade);

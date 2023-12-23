@@ -1,4 +1,4 @@
-import { SecretsEnum, SecretsServiceAdapter } from "@/infra";
+import { SecretsEnum, SecretsAdapter } from "@/infra";
 
 import { MongoClient, Collection } from "mongodb";
 
@@ -6,7 +6,7 @@ export class DatabaseNoSQLHelper {
     private client: MongoClient;
 
     constructor(
-		private readonly secrets: SecretsServiceAdapter
+		private readonly secrets: SecretsAdapter
     ) { }
 
     async connect(): Promise<void> {

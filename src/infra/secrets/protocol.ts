@@ -1,6 +1,6 @@
 import { SecretsEnum } from "./enum";
 
-export interface SecretsServiceProtocol {
+export interface SecretsProtocol {
     getSecret(name: SecretsEnum): string | null;
     getRequiredSecret(name: SecretsEnum): string;
 }

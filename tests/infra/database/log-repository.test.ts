@@ -1,8 +1,8 @@
-import { DatabaseNoSQLHelper, LogRepositoryAdapter, SecretsServiceAdapter } from "@/infra";
+import { DatabaseNoSQLHelper, LogRepositoryAdapter, SecretsAdapter } from "@/infra";
 
 describe("Infra - LogRepositoryAdapter", () => {
     
-    const databaseNoSQLHelper = new DatabaseNoSQLHelper(new SecretsServiceAdapter());
+    const databaseNoSQLHelper = new DatabaseNoSQLHelper(new SecretsAdapter());
 
     beforeAll(async () => {
         await databaseNoSQLHelper.connect();

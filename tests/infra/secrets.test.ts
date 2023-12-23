@@ -1,11 +1,11 @@
-import { SecretsServiceAdapter, SecretsEnum } from "@/infra";
+import { SecretsAdapter, SecretsEnum } from "@/infra";
 
-describe("Infra - SecretsServiceAdapter", () => {
+describe("Infra - SecretsAdapter", () => {
 
     test("Should get secret | getSecret", async () => {
         const variable = SecretsEnum.Secret;
         process.env[variable] = "Secret";
-        const sut = new SecretsServiceAdapter();
+        const sut = new SecretsAdapter();
         jest.spyOn(sut, "getSecret");
 
         const result = sut.getSecret(variable);
@@ -18,7 +18,7 @@ describe("Infra - SecretsServiceAdapter", () => {
     test("Should get secret null | getRequiredSecret", async () => {
         const variable = SecretsEnum.Secret;
         delete process.env[variable];
-        const sut = new SecretsServiceAdapter();
+        const sut = new SecretsAdapter();
         jest.spyOn(sut, "getSecret");
 
         const result = sut.getSecret(variable);
@@ -31,7 +31,7 @@ describe("Infra - SecretsServiceAdapter", () => {
     test("Should get error | getRequiredSecret", async () => {
         const variable = SecretsEnum.Secret;
         delete process.env[variable];
-        const sut = new SecretsServiceAdapter();
+        const sut = new SecretsAdapter();
         jest.spyOn(sut, "getRequiredSecret");
         let error: Error | null = null;
 		
@@ -50,7 +50,7 @@ describe("Infra - SecretsServiceAdapter", () => {
     test("Should get required secret | getRequiredSecret", async () => {
         const variable = SecretsEnum.Secret;
         process.env[variable] = "Secret";
-        const sut = new SecretsServiceAdapter();
+        const sut = new SecretsAdapter();
         jest.spyOn(sut, "getRequiredSecret");
 
         const result = sut.getRequiredSecret(variable);

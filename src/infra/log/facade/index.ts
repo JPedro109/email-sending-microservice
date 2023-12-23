@@ -1,6 +1,6 @@
-import { LogServiceProtocol, LogBashAdapter, LogNoSQLAdapter } from "@/infra";
+import { LogProtocol, LogBashAdapter, LogNoSQLAdapter } from "@/infra";
 
-export class LogServiceFacade implements LogServiceProtocol {
+export class LogFacade implements LogProtocol {
 
     constructor( 
 		private readonly logBashAdapter: LogBashAdapter,

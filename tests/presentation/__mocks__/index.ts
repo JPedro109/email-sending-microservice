@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import {
-    LogServiceProtocol,
-    QueueServiceProtocol, 
+    LogProtocol,
+    QueueProtocol, 
     SecretsEnum, 
-    SecretsServiceProtocol
+    SecretsProtocol
 } from "@/infra";
 import { SendEmailServiceProtocol, SendEmailServiceDTO } from "@/service";
 
@@ -15,13 +15,13 @@ export class SendEmailServiceStub implements SendEmailServiceProtocol {
     }
 }
 
-export class QueueServiceStub implements QueueServiceProtocol {
+export class QueueStub implements QueueProtocol {
     async sendMessage(queue: string, object: object): Promise<void> { }
 
     async consumeMessage<Type>(queue: string, callback: (message: Type) => Promise<void>): Promise<void> { }
 }
 
-export class SecretsServiceStub implements SecretsServiceProtocol {
+export class SecretsStub implements SecretsProtocol {
     
     getSecret(name: SecretsEnum): string | null {
         return name;
@@ -33,7 +33,7 @@ export class SecretsServiceStub implements SecretsServiceProtocol {
     }
 }
 
-export class LogServiceFacadeStub implements LogServiceProtocol {
+export class LogFacadeStub implements LogProtocol {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     trace(title: string, message: string, trace: string): boolean {

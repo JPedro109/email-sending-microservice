@@ -1,11 +1,11 @@
 import { Message } from "amqplib";
-import { LogServiceProtocol, QueueServiceProtocol, QueueHelper } from "@/infra";
+import { LogProtocol, QueueProtocol, QueueHelper } from "@/infra";
 
-export class QueueServiceAdapter implements QueueServiceProtocol {
+export class QueueAdapter implements QueueProtocol {
 
     constructor(
         private readonly queueHelper: QueueHelper,
-        private readonly logService: LogServiceProtocol
+        private readonly log: LogProtocol
     ) { }
 
     private deserializeMessage<Type>(message: Message): Type {
@@ -23,7 +23,7 @@ export class QueueServiceAdapter implements QueueServiceProtocol {
                 await callback(deserializedMessage);
                 this.queueHelper.channel.ack(message);
             } catch(e) {
-                this.logService.error("Erro na Deserialização da Mensagem", message.content.toString());
+                this.log.error("Erro na Deserialização da Mensagem", message.content.toString());
                 this.queueHelper.channel.ack(message);
             }
         });

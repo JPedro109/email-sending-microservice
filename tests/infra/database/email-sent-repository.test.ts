@@ -1,8 +1,8 @@
-import { DatabaseNoSQLHelper, EmailSentRepositoryAdapter, SecretsServiceAdapter } from "@/infra";
+import { DatabaseNoSQLHelper, EmailSentRepositoryAdapter, SecretsAdapter } from "@/infra";
 
 describe("External - EmailSentRepositoryAdapter", () => {
     
-    const databaseNoSQLHelper = new DatabaseNoSQLHelper(new SecretsServiceAdapter());
+    const databaseNoSQLHelper = new DatabaseNoSQLHelper(new SecretsAdapter());
 
     beforeAll(async () => {
         await databaseNoSQLHelper.connect();

@@ -1,8 +1,8 @@
-import { DatabaseNoSQLHelper, LogRepositoryAdapter, SecretsServiceAdapter, LogNoSQLAdapter, LogBashAdapter } from "@/infra";
+import { DatabaseNoSQLHelper, LogRepositoryAdapter, SecretsAdapter, LogNoSQLAdapter, LogBashAdapter } from "@/infra";
 
 describe("External - LogNoSQLAdapter", () => {
     
-    const secretsAdapter = new SecretsServiceAdapter();
+    const secretsAdapter = new SecretsAdapter();
     const logRepository = new LogRepositoryAdapter(new DatabaseNoSQLHelper(secretsAdapter));
     const logBashAdapter = new LogBashAdapter();
 

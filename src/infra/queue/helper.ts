@@ -1,4 +1,4 @@
-import { SecretsEnum, SecretsServiceProtocol } from "@/infra";
+import { SecretsEnum, SecretsProtocol } from "@/infra";
 import { Channel, Connection, connect } from "amqplib";
 
 export class QueueHelper {
@@ -6,11 +6,11 @@ export class QueueHelper {
     private connection: Connection | null = null;
     channel: Channel;
 
-    constructor(private readonly secretsService: SecretsServiceProtocol) { }
+    constructor(private readonly secrets: SecretsProtocol) { }
 
     async connect(): Promise<void> {
         if(!this.connection) {
-            this.connection = await connect(this.secretsService.getRequiredSecret(SecretsEnum.QueueHost));
+            this.connection = await connect(this.secrets.getRequiredSecret(SecretsEnum.QueueHost));
             this.channel = await this.connection.createChannel();
         }
     }

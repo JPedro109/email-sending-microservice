@@ -1,4 +1,4 @@
-export interface LogServiceProtocol {
+export interface LogProtocol {
     trace(title: string, message: string, trace: string): boolean;
     info(title: string, message: string): boolean;
     warning(title: string, message: string): boolean;

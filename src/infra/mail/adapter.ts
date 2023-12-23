@@ -1,25 +1,25 @@
-import { MailServiceProtocol, SecretsEnum, SecretsServiceProtocol } from "@/infra";
+import { MailProtocol, SecretsEnum, SecretsProtocol } from "@/infra";
 
 import path from "path";
 
 import nodemailer, { SentMessageInfo, Transporter } from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 
-export class MailServiceAdapter implements MailServiceProtocol {
+export class MailAdapter implements MailProtocol {
 
     private readonly mail: Transporter<SentMessageInfo>;
     private readonly ssl = false;
     private readonly emailBodiesPath = "./src/infra/mail/bodies";
 
-    constructor(private readonly secretsService: SecretsServiceProtocol) {
+    constructor(private readonly secrets: SecretsProtocol) {
 
         this.mail = nodemailer.createTransport({
-            host: this.secretsService.getRequiredSecret(SecretsEnum.HostProviderEmail),
-            port: parseInt(this.secretsService.getRequiredSecret(SecretsEnum.PortProviderEmail)),
+            host: this.secrets.getRequiredSecret(SecretsEnum.HostProviderEmail),
+            port: parseInt(this.secrets.getRequiredSecret(SecretsEnum.PortProviderEmail)),
             secure: this.ssl,
             auth: { 
-                user: this.secretsService.getRequiredSecret(SecretsEnum.EmailProviderEmail), 
-                pass: this.secretsService.getRequiredSecret(SecretsEnum.PasswordProviderEmail)
+                user: this.secrets.getRequiredSecret(SecretsEnum.EmailProviderEmail), 
+                pass: this.secrets.getRequiredSecret(SecretsEnum.PasswordProviderEmail)
             }
         }).use("compile", hbs({
             viewEngine: {
@@ -34,7 +34,7 @@ export class MailServiceAdapter implements MailServiceProtocol {
 
     async sendMail(to: string, subject: string, html: string, context?: object): Promise<void> {
         const email = {
-            from: this.secretsService.getRequiredSecret(SecretsEnum.EmailProviderEmail),
+            from: this.secrets.getRequiredSecret(SecretsEnum.EmailProviderEmail),
             to,
             subject,
             template: html,

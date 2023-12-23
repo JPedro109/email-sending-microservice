@@ -1,9 +1,9 @@
-import { databaseNoSQLHelper, queueHelper, sendEmailServiceListener } from "@/factories";
+import { databaseNoSQLHelper, queueHelper, sendEmailListener } from "@/factories";
 
 queueHelper
     .connect()
     .then(async () => {
         await databaseNoSQLHelper.connect();
-        sendEmailServiceListener.execute();
+        sendEmailListener.execute();
     })
     .catch(console.error);

@@ -2,19 +2,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import {
-    MailServiceProtocol,
-    QueueServiceProtocol,
+    MailProtocol,
+    QueueProtocol,
     EmailSentRepositoryProtocol,
     EmailSentModel,
-    LogServiceProtocol
+    LogProtocol
 } from "@/infra";
 
-export class MailServiceStub implements MailServiceProtocol {
+export class MailStub implements MailProtocol {
     async sendMail(to: string, subject: string, html: string, context?: object): Promise<void> { 
     }
 }
 
-export class QueueServiceStub implements QueueServiceProtocol {
+export class QueueStub implements QueueProtocol {
     async sendMessage(queue: string, object: object): Promise<void> { }
 
     async consumeMessage<Type>(queue: string, callback: (message: Type) => Promise<void>): Promise<void> { }
@@ -27,7 +27,7 @@ export class EmailSentRepositoryStub implements EmailSentRepositoryProtocol {
     }
 }
 
-export class LogServiceFacadeStub implements LogServiceProtocol {
+export class LogFacadeStub implements LogProtocol {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     trace(title: string, message: string, trace: string): boolean {
