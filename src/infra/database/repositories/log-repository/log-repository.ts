@@ -3,7 +3,7 @@ import { LogRepositoryProtocol, LogModel, DatabaseNoSQLHelper } from "@/infra";
 import { WithId, Document } from "mongodb";
 
 export class LogRepositoryAdapter implements LogRepositoryProtocol {
-    private readonly collection: string = "logemailsendingmicroservice";
+    private readonly collection: string = "email-sending-microservice-log";
 
     constructor(private readonly databaseNoSQLHelper: DatabaseNoSQLHelper) { }
 

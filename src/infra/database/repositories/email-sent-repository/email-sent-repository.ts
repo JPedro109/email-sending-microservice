@@ -3,7 +3,7 @@ import { EmailSentRepositoryProtocol, EmailSentModel, DatabaseNoSQLHelper } from
 import { WithId, Document } from "mongodb";
 
 export class EmailSentRepositoryAdapter implements EmailSentRepositoryProtocol {
-    private readonly collection = "emailsent";
+    private readonly collection = "email-sent";
 
     constructor(private readonly databaseNoSQLHelper: DatabaseNoSQLHelper) { }
 
