@@ -9,7 +9,7 @@ describe("Infra - LogRepositoryAdapter", () => {
     });
 
     afterAll(async () => {
-        await databaseNoSQLHelper.getCollection("logletmeask").deleteMany({});
+        await databaseNoSQLHelper.getCollection("email-sending-microservice-log", "log").deleteMany({});
         await databaseNoSQLHelper.disconnect();
     });
     

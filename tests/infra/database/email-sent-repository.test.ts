@@ -9,7 +9,7 @@ describe("External - EmailSentRepositoryAdapter", () => {
     });
 
     afterAll(async () => {
-        await databaseNoSQLHelper.getCollection("emailsent").deleteMany({});
+        await databaseNoSQLHelper.getCollection("email-sent", "email-sending-microservice").deleteMany({});
         await databaseNoSQLHelper.disconnect();
     });
     
