@@ -4,7 +4,7 @@
 <p>🚀 Aplicação voltada para envio de email</p>
 
 # Status da Aplicação
-<p>🔥 Aplicação Em Desenvolvimento</p>
+<p>🔥 Aplicação Finalizada</p>
 
 # Features
 - Envio de Email
