@@ -1,0 +1,11 @@
+FROM node:20-alpine
+
+WORKDIR /email-sending-microservice
+
+COPY package.json .
+
+RUN yarn install
+
+COPY . .
+
+CMD [ "yarn", "dev" ]

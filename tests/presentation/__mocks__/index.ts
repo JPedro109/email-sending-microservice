@@ -2,15 +2,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import {
-    MailProtocol,
-    QueueProtocol,
-    EmailSentRepositoryProtocol,
-    EmailSentModel,
-    LogProtocol
+    LogProtocol,
+    QueueProtocol, 
+    SecretsEnum, 
+    SecretsProtocol
 } from "@/infra";
+import { SendEmailServiceProtocol, SendEmailServiceDTO } from "@/service";
 
-export class MailStub implements MailProtocol {
-    async sendMail(to: string, subject: string, html: string, context?: object): Promise<void> { 
+export class SendEmailServiceStub implements SendEmailServiceProtocol {
+    async execute(dto: SendEmailServiceDTO): Promise<boolean> {
+        return true;
     }
 }
 
@@ -20,10 +21,15 @@ export class QueueStub implements QueueProtocol {
     async consumeMessage<Type>(queue: string, callback: (message: Type) => Promise<void>): Promise<void> { }
 }
 
-export class EmailSentRepositoryStub implements EmailSentRepositoryProtocol {
+export class SecretsStub implements SecretsProtocol {
+    
+    getSecret(name: SecretsEnum): string | null {
+        return name;
 
-    async createEmailSent(email: string, subject: string, template: string, context: string, service: string): Promise<EmailSentModel> {
-        return new EmailSentModel("1", email, subject, template, context, service);
+    }
+
+    getRequiredSecret(name: SecretsEnum): string {
+        return name;
     }
 }
 

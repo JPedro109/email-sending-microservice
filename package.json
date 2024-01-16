@@ -2,7 +2,7 @@
   "name": "email-sending-microservice",
   "version": "1.0.0",
   "description": "Microsserviço de envio de email",
-  "main": "dist/server.js",
+  "main": "dist/app.js",
   "repository": "https://github.com/JPedro109/email-sending-microservice.git",
   "author": "João Pedro <joaopedromoraesnsilva@gmail.com>",
   "license": "MIT",
@@ -49,6 +49,7 @@
     "amqplib": "^0.10.3",
     "dotenv": "^16.0.3",
     "express-handlebars": "7.0.4",
+    "mongodb": "^6.3.0",
     "nodemailer": "^6.9.2",
     "nodemailer-express-handlebars": "^6.1.0"
   }

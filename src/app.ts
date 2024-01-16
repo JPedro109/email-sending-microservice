@@ -1,14 +1,9 @@
-import { QueueHelper } from "@/infra";
-import { mailServiceListener } from "@/presentation";
+import { databaseNoSQLHelper, queueHelper, sendEmailListener } from "@/factories";
 
-const bootstrap = async () => {
-    await QueueHelper
-        .connect()
-        .then(() => {
-            mailServiceListener();
-            console.log("Serviço de envio de email iniciado");
-        })
-        .catch(e => console.log(e));
-};
-
-bootstrap();
+queueHelper
+    .connect()
+    .then(async () => {
+        await databaseNoSQLHelper.connect();
+        sendEmailListener.execute();
+    })
+    .catch(console.error);

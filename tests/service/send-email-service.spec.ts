@@ -1,18 +1,20 @@
 import { SendEmailService } from "@/service";
-import { MailServiceStub } from "./__mocks__";
+import { EmailSentRepositoryStub, LogFacadeStub, MailStub } from "./__mocks__";
 
 const makeSut = () => {
-    const mailStub = new MailServiceStub();
-    const sut = new SendEmailService(mailStub);
+    const mailStub = new MailStub();
+    const emailSentRepositoryStub = new EmailSentRepositoryStub();
+    const logFacadeStub = new LogFacadeStub();
+    const sut = new SendEmailService(mailStub, emailSentRepositoryStub, logFacadeStub);
 
     return {
         sut
     };
 };
 
-describe("Service - SendEmail", () => {
+describe("Service - SendEmailService", () => {
 
-    test("Shoud send email", async () => {
+    test("Should send email", async () => {
         const to = "email@test.com";
         const subject = "Test";
         const template = "create-body";
